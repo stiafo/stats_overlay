@@ -1,0 +1,25 @@
+{
+  "name": "stats_overlay",
+  "version": "1.0.0",
+  "description": "Overlay application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stiafo/stats_overlay.git"
+  },
+  "author": "stiffi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stiafo/stats_overlay/issues"
+  },
+  "homepage": "https://github.com/stiafo/stats_overlay#readme",
+  "devDependencies": {
+    "electron": "^18.2.4"
+  },
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
+  }
+}
