@@ -1,10 +1,10 @@
-window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
+const { contextBridge, ipcRenderer } = require('electron');
 
-  for (const dependency of ['chrome', 'node', 'electron']) {
-    replaceText(`${dependency}-version`, process.versions[dependency])
-  }
+contextBridge.exposeInMainWorld('electronAPI', {
+  onStats: (callback) => ipcRenderer.on('stats', (event, args) => {
+    callback(args);
+  }),
+  getFixtures: () => ipcRenderer.invoke('dialog:get-fixtures'),
+  selectFixture: (fixture_id) => ipcRenderer.send('select-fixture', fixture_id),
+  close: () => ipcRenderer.send('close-app'),
 })

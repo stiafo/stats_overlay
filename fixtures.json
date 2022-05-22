@@ -1,0 +1,106 @@
+{
+  "get":"fixtures",
+  "parameters":{
+    "live":"all"
+  },
+  "errors":[],
+  "results":62,
+  "paging":{
+    "current":1,
+    "total":1
+  },
+  "response":[
+    {
+      "fixture":{
+        "id":215662,
+        "referee":null,
+        "timezone":"UTC",
+        "date":"2021-04-07T14:00:00+00:00",
+        "timestamp":1617804000,
+        "periods":{
+          "first":1617804000,
+          "second":null
+        },
+        "venue":{
+          "id":2909,
+          "name":"Stadion Dragan Nikolić",
+          "city":"Pirot"
+        },
+        "status":{
+          "long":"First Half",
+          "short":"1H",
+          "elapsed":7
+        }
+      },
+      "league":{
+        "id":287,
+        "name":"Prva Liga",
+        "country":"Serbia",
+        "logo":"https://media.api-sports.io/football/leagues/287.png",
+        "flag":"https://media.api-sports.io/flags/rs.svg",
+        "season":2020,
+        "round":"Regular Season - 26"
+      },
+      "teams":{
+        "home":{
+          "id":463,
+          "name":"Aldosivi",
+          "logo":"https://media.api-sports.io/football/teams/2640.png",
+          "winner":null
+        },
+        "away":{
+          "id":442,
+          "name":"Defensa Y Justicia",
+          "logo":"https://media.api-sports.io/football/teams/2649.png",
+          "winner":null
+        }
+      }
+    },
+    {
+      "fixture":{
+        "id":2381923,
+        "referee":null,
+        "timezone":"UTC",
+        "date":"2021-04-07T14:00:00+00:00",
+        "timestamp":1617804000,
+        "periods":{
+          "first":12439875018,
+          "second":null
+        },
+        "venue":{
+          "id":2748,
+          "name":"Stadion Dragan Nikolić",
+          "city":"Pirot"
+        },
+        "status":{
+          "long":"First Half",
+          "short":"1H",
+          "elapsed":7
+        }
+      },
+      "league":{
+        "id":235,
+        "name":"Prva Liga",
+        "country":"Serbia",
+        "logo":"https://media.api-sports.io/football/leagues/287.png",
+        "flag":"https://media.api-sports.io/flags/rs.svg",
+        "season":2020,
+        "round":"Regular Season - 26"
+      },
+      "teams":{
+        "home":{
+          "id":84923,
+          "name":"Some random team",
+          "logo":"https://media.api-sports.io/football/teams/2640.png",
+          "winner":null
+        },
+        "away":{
+          "id":247,
+          "name":"Another team",
+          "logo":"https://media.api-sports.io/football/teams/2649.png",
+          "winner":null
+        }
+      }
+    }
+  ]
+}

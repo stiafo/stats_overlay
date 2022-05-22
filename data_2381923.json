@@ -1,0 +1,41 @@
+{
+  "get":"fixtures/statistics",
+  "parameters":{
+    "fixture":"215662",
+    "type":"Shots on Goal"
+  },
+  "errors":[],
+  "results":2,
+  "paging":{
+    "current":1,
+    "total":1
+  },
+  "response":[
+    {
+      "team":{
+        "id":463,
+        "name":"Aldosivi",
+        "logo":"https://media.api-sports.io/football/teams/463.png"
+      },
+      "statistics":[
+        {
+          "type":"Shots on Goal",
+          "value":6
+        }
+      ]
+    },
+    {
+      "team":{
+        "id":442,
+        "name":"Defensa Y Justicia",
+        "logo":"https://media.api-sports.io/football/teams/442.png"
+      },
+      "statistics":[
+        {
+          "type":"Shots on Goal",
+          "value":2
+        }
+      ]
+    }
+  ]
+}
