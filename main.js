@@ -7,6 +7,7 @@ const fs_promise = require("fs/promises")
 const fetch = require("node-fetch")
 
 const { API_KEY } = require('./config.js')
+const { Stat } = require('./models.js');
 
 
 const createWindow = () => {
@@ -28,7 +29,7 @@ const createWindow = () => {
 }
 
 async function getFixtures() {
-  let url = `https://apiv3.apifootball.com/?action=get_events&from=2020-04-25&to=2020-05-01&league_id=149&APIkey=${API_KEY}`;
+  let url = `https://apiv3.apifootball.com/?action=get_events&from=2022-04-25&to=2022-05-01&league_id=153&APIkey=${API_KEY}`;
   let settings = { method: "Get" };
 
   return fetch (url, settings)

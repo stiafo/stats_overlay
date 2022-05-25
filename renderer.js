@@ -4,6 +4,11 @@ const fixture_div = document.getElementById('fixture_list');
 const close_btn = document.getElementById('close');
 const stats_element = document.getElementById('stats');
 
+
+window.electronAPI.Stat_obj((data) => {
+  console.log(data);
+});
+
 let stat = 0;
 
 window.electronAPI.onStats((data) => {
