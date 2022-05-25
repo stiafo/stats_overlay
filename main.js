@@ -4,6 +4,10 @@ const electronReload = require('electron-reload')
 const path = require("path")
 const fs = require("fs")
 const fs_promise = require("fs/promises")
+const fetch = require("node-fetch")
+
+const { API_KEY } = require('./config.js')
+
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -24,20 +28,25 @@ const createWindow = () => {
 }
 
 async function getFixtures() {
-    try {
-      const data = await fs_promise.readFile('fixtures.json');
-      return JSON.parse(data)
-    } catch (err) {
-      console.log(err);
-    }
+  let url = `https://apiv3.apifootball.com/?action=get_events&from=2020-04-25&to=2020-05-01&league_id=149&APIkey=${API_KEY}`;
+  let settings = { method: "Get" };
+
+  return fetch (url, settings)
+    .then(res => res.json());
 }
 
 //we store the intervals here to have better control over them
 let interval_list = []
 
 function statsInterval(win, fixture_id) {
-  let stats = JSON.parse(fs.readFileSync(`data_${fixture_id}.json`, 'utf-8'));
-  win.webContents.send("stats", stats);
+  let url = `https://apiv3.apifootball.com/?action=get_statistics&match_id=${fixture_id}&APIkey=${API_KEY}`
+  let settings = { method: "Get" };
+
+  fetch (url, settings)
+    .then(res => res.json())
+    .then((data) => {
+      win.webContents.send("stats", data[fixture_id.toString()]);
+    }, (e) => { console.log(e) });
 
 }
 

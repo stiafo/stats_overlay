@@ -7,19 +7,23 @@ const stats_element = document.getElementById('stats');
 let stat = 0;
 
 window.electronAPI.onStats((data) => {
-  stat = data.response[0].statistics[0].value + data.response[1].statistics[0].value;
+  data.statistics.forEach((stat_type) => {
+    if (stat_type.type == 'Shots On Goal') {
+      stat = parseInt(stat_type.home) + parseInt(stat_type.away);
+    }
+  });
   stats_element.innerText = `Shots on goal: ${stat}`;
 });
 
 function showFixtures(fixture_list) {
-  fixture_list.response.forEach((fixture) => {
+  fixture_list.forEach((fixture) => {
     let parent_div = document.createElement("div");
     let team_names = document.createElement("p");
 
-    team_names.innerHTML = fixture.teams.home.name + " vs. " + fixture.teams.away.name;
+    team_names.innerHTML = fixture.match_hometeam_name + " vs. " + fixture.match_awayteam_name;
     team_names.classList.add("fixture");
 
-    parent_div.id = fixture.fixture.id;
+    parent_div.id = fixture.match_id;
     parent_div.addEventListener("click", () => {
       selectFixture(parent_div.id);
     });
