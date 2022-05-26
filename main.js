@@ -12,10 +12,10 @@ const { Stat } = require('./models.js');
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 260,
-    maxWidth: 260, minWidth: 260,
-    height: 300,
-    maxHeight: 300, minHeight: 300,
+    width: 300,
+    maxWidth: 300, minWidth: 300,
+    //height: 300,
+    //maxHeight: 300, minHeight: 300,
     frame: false,
     autoHideMenuBar: true,
     transparent: true,
@@ -25,7 +25,7 @@ const createWindow = () => {
     }
   })
 
-  win.loadFile('index.html')
+  win.loadFile('static/index.html')
 }
 
 async function getFixtures() {
@@ -36,35 +36,19 @@ async function getFixtures() {
     .then(res => res.json());
 }
 
-//we store the intervals here to have better control over them
-let interval_list = []
-
-function statsInterval(win, fixture_id) {
-  let url = `https://apiv3.apifootball.com/?action=get_statistics&match_id=${fixture_id}&APIkey=${API_KEY}`
-  let settings = { method: "Get" };
-
-  fetch (url, settings)
-    .then(res => res.json())
-    .then((data) => {
-      win.webContents.send("stats", data[fixture_id.toString()]);
-    }, (e) => { console.log(e) });
-
-}
-
 app.whenReady().then(() => {
   ipcMain.on('close-app', () => app.quit());
 
-  ipcMain.on('select-fixture', (event, args) => {
-    //clear any ongoing intervals
-    if (interval_list != []) {
-      interval_list.forEach((ongoing_interval) => {
-        clearInterval(ongoing_interval);
-      });
-    }
+  ipcMain.on('select-fixture', (event, new_stat) => {
+    new Stat(new_stat.action, new_stat.parameters, new_stat.type, new_stat.home_team, new_stat.away_team);
+  });
 
-    focused_win = BrowserWindow.getFocusedWindow()
-    const interval = setInterval( () => { statsInterval(focused_win, args) }, 3000);
-    interval_list.push(interval);
+  ipcMain.on('delete_stat', (event, args) => {
+    let del_stat = Stat.stat_list.filter((stat_obj) => {
+      return stat_obj.stat_id == args;
+    });
+    del_stat[0].deactivate();
+    delete del_stat[0];
   });
 
   ipcMain.handle('dialog:get-fixtures', getFixtures);

@@ -2,19 +2,30 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const fetch = require('node-fetch')
 
 const { API_KEY, API_URL } = require('./config.js');
+const utilities = require('./utils.js');
 
 class Stat {
 
   static stat_list = [];
 
-  constructor(action, parameters=[], win) {
-    this.stat_id = 'stat_' + action + parameters.concat();
+  constructor(action, parameters=[], type, home_team, away_team) {
+    this.stat_id = utilities.parameters_as_url(action, parameters, type);
     this.action = action;
     this.parameters = parameters;
+    this.type = type;
+    this.home_team = home_team;
+    this.away_team = away_team;
     this.interval = setInterval( () => { this.statsInterval() }, 3000);
     this.active = true;
 
     Stat.stat_list.push(this);
+
+    BrowserWindow.getFocusedWindow().webContents.send("new_stat", {
+      stat_id: this.stat_id,
+      type: this.type,
+      home_team: this.home_team,
+      away_team: this.away_team,
+    });
   }
 
   get_url() {
@@ -45,8 +56,17 @@ class Stat {
     fetch (url, settings)
       .then(res => res.json())
       .then((data) => {
-        //console.log(data);
-        BrowserWindow.getFocusedWindow().webContents.send("stat_from_class", data);
+        let statistics = data[Object.keys(data)[0]].statistics
+        let stat;
+
+        statistics.forEach((stat_type) => {
+          if (stat_type.type == this.type) {
+            stat = parseInt(stat_type.home) + parseInt(stat_type.away);
+          }
+        });
+
+        BrowserWindow.getFocusedWindow().webContents.send("stat_from_class", {
+          stat_id: this.stat_id, data: stat });
       }, (e) => { console.log(e) });
 
   }

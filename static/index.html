@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Football Stats</title>
+  </head>
+  <body>
+    <span id="drag-icon" class="icon">&#x2723</span>
+    <div id="stat-div">
+      <div id="no_stats">
+        <h3>No Stat Selected</h3>
+      </div>
+      <!--
+      <div class="stats">
+        <div class="row">
+          <p class="stat_teams">Middlesborrough vs Coventry Football Club</p>
+          <span class="icon close-icon">&#xd7</span>
+        </div>
+        <h3 class="stat_data">Shots on goal: 3</h3>
+      </div>
+      -->
+    </div>
+    <div id="buttons">
+      <button type="button" id="show">Select Fixture</button>
+      <button type="button" id="hide">Hide Fixtures</button>
+      <button type="button" id="close">Close app</button>
+    </div>
+
+    <div id="fixture_list">
+    </div>
+
+    <script src="../renderer.js"></script>
+
+  </body>
+</html>
